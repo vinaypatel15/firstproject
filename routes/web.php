@@ -11,12 +11,12 @@
 |
 */
 
-// Access Key ID: AKIAIOX5M3Y4CGFTOUTA
-//  abcdefgh06-21
-// Secret Access Key: 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
+// Access Key ID: AKIAJBBDWTVA2GR37Y6A
+//  123456066a-21
+// Secret Access Key: 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
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('user', 'UserController@show');
+Route::get('/items', 'AmazonController@getItems');
