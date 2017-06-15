@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class AmazonController extends Controller
 {
-    public function getItems(){
+    public function getItems(Request $request){
+
 
 		// Your AWS Access Key ID, as taken from the AWS Your Account page
 		$aws_access_key_id = "AKIAJBBDWTVA2GR37Y6A";
@@ -19,13 +20,15 @@ class AmazonController extends Controller
 
 		$uri = "/onca/xml";
 
+		$keywords = $request->get('q');
+
 		$params = array(
 		    "Service" => "AWSECommerceService",
 		    "Operation" => "ItemSearch",
 		    "AWSAccessKeyId" => "AKIAJBBDWTVA2GR37Y6A",
 		    "AssociateTag" => "123456066a-21",
 		    "SearchIndex" => "All",
-		    "Keywords" => "iphone",
+		    "Keywords" => $keywords,
 		    "ResponseGroup" => "ItemAttributes"
 		);
 
@@ -66,7 +69,24 @@ class AmazonController extends Controller
 
 		$data = $this->convertJson($data);
 
-		var_dump($data);
+		//var_dump($data);
+
+		$items = [];
+
+		foreach ($data as $key => $value) {
+			if($key == 'Item'){
+				$asin = null;
+				$itemAttr = null;
+				foreach ($value as $key => $val) {
+					if($key == 'ASIN')
+						$asin = $val;
+					else if($key == 'ItemAttributes')
+						$items[$asin] = $val;
+				}
+			}
+		}
+
+		var_dump($items);
 
 		return $data;
 	}
