@@ -19,4 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/items', 'AmazonController@getItems');
+Route::get('/items', 'MainController@getItems');

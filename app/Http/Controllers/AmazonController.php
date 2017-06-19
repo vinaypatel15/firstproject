@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AmazonController extends Controller
 {
-    public function getItems(Request $request){
+    public function getItems(Request $request,$keywords){
 
 
 		// Your AWS Access Key ID, as taken from the AWS Your Account page
@@ -20,7 +20,7 @@ class AmazonController extends Controller
 
 		$uri = "/onca/xml";
 
-		$keywords = $request->get('q');
+		//var_dump($keywords);
 
 		$params = array(
 		    "Service" => "AWSECommerceService",
