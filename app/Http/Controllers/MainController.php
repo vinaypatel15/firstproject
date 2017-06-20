@@ -28,6 +28,6 @@ class MainController extends Controller
 
     	$flipkartData = $flipkart->getItems($request,$keywords);
 
-    	var_dump($flipkartData);	
+    	//var_dump($flipkartData);	
     }
 }
